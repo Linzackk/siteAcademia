@@ -3,6 +3,9 @@ venv/
 env/
 .venv/
 
+teste.py
+*banco-dados
+
 __pychache__/
 *.py[cod]
 *.pyo

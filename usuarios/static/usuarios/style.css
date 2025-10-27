@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: hsl(0, 0%, 15%);
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    background-color: hsl(0, 0%, 25%);
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+main > h1 {
+    color: hsl(0, 0%, 85%);
+    margin: 10px;
+}
+
+main > p {
+    color: hsl(0, 0%, 80%);
+    margin: 15px 10px;
+}
+
+main > ul {
+    color: hsl(0, 0%, 80%);
+    text-align: left;
+    display: inline-block;
+    width: 465px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

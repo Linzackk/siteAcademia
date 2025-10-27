@@ -1,4 +1,8 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Aluno
+
 
 def home(request):
-    return HttpResponse("<h1>Bem-vindo à Academia do Zackinho!</h1><p>Minha primeira Página em Django!!!</p><h2>Hello, World!</h2>")
+    # Exemplo de Dados Dinâmicos (mudam com as informações)
+    alunos = Aluno.objects.all()
+    return render(request, 'usuarios/home.html', {'alunos': alunos})
