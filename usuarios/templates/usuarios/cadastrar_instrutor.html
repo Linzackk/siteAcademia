@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CADASTRO DE INSTRUTORES</title>
+</head>
+<body>
+    <h1>Cadastro de Instrutor</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="Submit">Cadastrar</button>
+    </form>
+    
+    <a href="{% url 'home' %}">Voltar</a>
+</body>
+</html>

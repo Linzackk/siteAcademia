@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acamia do Zackinho</title>
+    <title>Academia</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}">
+    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}?v=3">
 </head>
 <body>
-    <main>
+    <header>
         <h1>Seja Bem-vindo à Academia </h1>
-        <p>Minha Primeira Página renderizada com template em Django!</p>
-        <ul>
-            {% for aluno in alunos %}
-                <li><b>{{ aluno.nome }} | {{ aluno.idade }} anos | {{ aluno.curso }}</b></li>
-            {% endfor %}
-        </ul>
+        <p>Uma academia feita usando Django!!!</p>
+        <nav>
+            <a href="{% url 'cadastrar_aluno' %}" id='cadastrar_aluno'>Cadastro de Alunos</a>
+            <a href="{% url 'cadastrar_instrutor' %}" id="cadastrar_instrutor">Cadastro de Instutores</a>
+            <a href="{% url 'listar_alunos' %}" id="listar_alunos">Lista de Alunos</a>
+            <a href="{% url 'listar_instrutores' %}" id="listar_instrutores">Lista de Instrutores</a>
+        </nav>
+    </header>
+    <main>
+
     </main>
 </body>
 </html>
