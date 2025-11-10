@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}?v=3">
-</head>
-<body>
-    <header>
-        <h1>Seja Bem-vindo à Academia </h1>
-        <p>Uma academia feita usando Django!!!</p>
-        <nav>
-            <a href="{% url 'cadastrar_aluno' %}" id='cadastrar_aluno'>Cadastro de Alunos</a>
-            <a href="{% url 'cadastrar_instrutor' %}" id="cadastrar_instrutor">Cadastro de Instutores</a>
-            <a href="{% url 'listar_alunos' %}" id="listar_alunos">Lista de Alunos</a>
-            <a href="{% url 'listar_instrutores' %}" id="listar_instrutores">Lista de Instrutores</a>
-        </nav>
-    </header>
-    <main>
+{% extends 'usuarios/base.html' %}
 
-    </main>
-</body>
-</html>
+{% block title %}ACADEMIA{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center fw-bold">ACADEMIA EM DJANGO</h1>
+<p class="text-center">Uma academia desenvolvida utilizando Django em Python.</p>
+
+{% endblock%}

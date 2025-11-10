@@ -1,18 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CADASTRO DE INSTRUTORES</title>
-</head>
-<body>
-    <h1>Cadastro de Instrutor</h1>
+{% extends 'usuarios/base.html' %}
+
+{% block title%}Cadastro de Instrutores{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center mb-5 fw-bold">CADASTRO DE INSTRUTORES</h2>
+
+<div class="card shadow p-4 mx-auto" style="max-width: 600px;">
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="Submit">Cadastrar</button>
+
+        <div class="mb-3">
+            <label for="nome" class="form-label fw-bold ">Nome</label>
+            <input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome do Instrutor">
+        </div>
+
+        <div class="mb-3">
+            <label for="idade" class="form-label fw-bold ">Idade</label>
+            <input type="number" name="idade" id="idade" class="form-control" placeholder="Digite a idade do Instrutor">
+        </div>
+
+        <div class="mb-3">
+            <label for="cpf" class="form-label fw-bold ">CPF</label>
+            <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Digite o CPF do Instrutor">
+        </div>
+
+        <div class="mb-3">
+            <label for="telefone" class="form-label fw-bold ">Telefone</label>
+            <input type="text" name="telefone" id="telefone" class="form-control" placeholder="Digite o Telefone do Instrutor">
+        </div>
+
+        <div class="mb-3">
+            <label for="codigo-ef" class="form-label fw-bold">Código EF</label>
+            <input type="number" name="codigo_ef" id="codigo-ef" class="form-control" placeholder="Digite o Código EF do Instrutor">
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'listar_instrutores' %}" class="btn btn-secondary">Voltar</a>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
     </form>
-    
-    <a href="{% url 'home' %}">Voltar</a>
-</body>
-</html>
+
+</div>
+
+{% endblock %}

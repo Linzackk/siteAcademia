@@ -71,7 +71,7 @@ def deletar_aluno(request, aluno_id):
     return redirect('listar_alunos')
 
 def deletar_instrutor(request, instrutor_id):
-    instrutor = get_object_or_404(Instrutor, instrutor_id)
+    instrutor = get_object_or_404(Instrutor, id=instrutor_id)
     instrutor.delete()
     return redirect('listar_instrutores')
 
