@@ -3,8 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .models import Aluno, Instrutor
 from .forms import AlunoForm, InstrutorForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 def home(request):
     return render(request, 'usuarios/home.html')
@@ -56,7 +58,7 @@ def registrar_aluno(request):
     return render(request, 'usuarios/registrar_aluno.html', {'form': form})
 
 @login_required
-@user_passes_test(is_staff)
+@user_passes_test(lambda u: u.is_superuser)
 def registrar_instrutor(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -149,7 +151,12 @@ def deletar_instrutor(request, instrutor_id):
     instrutor.delete()
     return redirect('listar_instrutores')
 
-class CustomLogoutView(LoginView):
+class CustomLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
-        messages.info(request, 'Você saiu da sua conta com segurança')
-        return super(request, *args, **kwargs)
+        messages.info(request, 'Você saiu da sua conta com segurança.')
+        return super().dispatch(request, *args, **kwargs)
+    
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'Você saiu da conta com segurança.')
+    return redirect('home')

@@ -23,5 +23,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('usuarios.urls')),
     path('login/', auth_views.LoginView.as_view(template_name='templates/login.html'), name='login'),
-    path('logout/', CustomLogoutView.as_view(next_page='login'), name="logout")
 ]

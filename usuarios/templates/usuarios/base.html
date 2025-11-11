@@ -30,9 +30,10 @@
                         <a href="{% url 'listar_instrutores' %}" class="nav-link">Instrutores</a>
                     </li>
                     {% if user.is_authenticated %}
-                        <li class="nav-item text-danger">
-                            <a href="{% url 'logout' %}" class="nav-link">Sair</a>
-                        </li>
+                        <form action="{% url 'logout' %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <li class="nav-item text-danger"><button type="submit" class="btn btn-outline-danger btn-sm">Sair</button></li>
+                        </form>
                     {% else %}
                         <li class="nav-item">
                             <a href="{% url 'login' %}" class="nav-link text-success">Entrar</a>
