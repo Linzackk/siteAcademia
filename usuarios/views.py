@@ -1,15 +1,29 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 from .models import Aluno, Instrutor
 from .forms import AlunoForm, InstrutorForm
 
 
 def home(request):
-    # Exemplo de Dados Dinâmicos (mudam com as informações)
-    alunos = Aluno.objects.all()
-    return render(request, 'usuarios/home.html', {'alunos': alunos})
+    return render(request, 'usuarios/home.html')
 
 def irParaCadastro(request):
     return render(request, 'usuarios/cadastrar_aluno.html')
+
+def registrar(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, 'Conta criada com Sucesso! Faça Login para acessar.')
+            return redirect('login')
+        else:
+            messages.error(request, 'Erro ao criar a conta. Verifique os dados.')
+    else:
+        form = UserCreationForm()
+    return render(request, 'usuarios/registrar.html', {'form': form} )
 
 def cadastrar_aluno(request):
     if request.method == "POST":
@@ -19,7 +33,6 @@ def cadastrar_aluno(request):
             return redirect('home')
     else:
         form = AlunoForm()
-        
     return render(request, 'usuarios/cadastrar_aluno.html', {'form': form})
 
 def cadastrar_instrutor(request):
@@ -33,10 +46,12 @@ def cadastrar_instrutor(request):
         
     return render(request, 'usuarios/cadastrar_instrutor.html', {'form': form})
 
+@login_required
 def listar_alunos(request):
     alunos = Aluno.objects.all()
     return render(request, 'usuarios/listar_alunos.html', {'alunos': alunos})
 
+@login_required
 def listar_instrutores(request):
     instrutores = Instrutor.objects.all()
     return render(request, 'usuarios/listar_instrutores.html', {'instrutores': instrutores})

@@ -1,17 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDITAR INSTRUTOR</title>
-</head>
-<body>
-    <h1>Editando Instrutores</h1>
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Editar Instrutor{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-4 mx-auto mb-5" style="max-width: 600px;">
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar</button>
+
+        <div class="mb-3">
+            <label for="nome" class="form-label fw-bold">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="{{ form.nome.value|default:'' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="idade" class="form-label fw-bold">Idade</label>
+            <input type="number" class="form-control" id="idade" name="idade" value="{{ form.idade.value|default:'' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="cpf" class="form-label fw-bold">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" value="{{ form.cpf.value|default:'' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="telefone" class="form-label fw-bold">Telefone</label>
+            <input type="text" class="form-control" id="telefone" name="telefone" value="{{ form.telefone.value|default:'' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="codigo-ef" class="form-label fw-bold">Código EF</label>
+            <input type="text" class="form-control" id="codigo-ef" name="codigo-ef" value="{{ form.codigo_ef.value|default:'' }}">
+        </div>
+        <div class="text-center mb-5 mt-5">
+            <button type="submit" class="btn btn-success me-5">Salvar</button>
+            <a href="{% url 'listar_alunos' %} " class="btn btn-info ms-5">Voltar</a>
+        </div>
+
     </form>
-    <a href="{% url 'home' %}">Voltar</a>
-</body>
-</html>
+
+</div>
+
+{% endblock%}

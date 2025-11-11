@@ -1,0 +1,24 @@
+{% extends 'usuarios/base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content%}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 22rem;">
+        <h3 class="text-center mb-4">Login</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label fw-bold">Usuário</label>
+                <input type="text" name="username" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">Senha</label>
+                <input type="password" name="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Login</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
