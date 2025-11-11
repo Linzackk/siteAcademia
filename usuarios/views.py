@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .models import Aluno, Instrutor
 from .forms import AlunoForm, InstrutorForm
-
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 def home(request):
     return render(request, 'usuarios/home.html')
+
+def is_staff(user):
+    return user.is_staff
 
 def irParaCadastro(request):
     return render(request, 'usuarios/cadastrar_aluno.html')
@@ -25,6 +28,62 @@ def registrar(request):
         form = UserCreationForm()
     return render(request, 'usuarios/registrar.html', {'form': form} )
 
+def registrar_aluno(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        nome = request.POST.get('nome')
+        idade = request.POST.get('idade')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        plano = request.POST.get('plano')
+
+        if form.is_valid():
+            user = form.save()
+            Aluno.objects.create(
+                user=user,
+                nome=nome,
+                idade=idade,
+                cpf=cpf,
+                telefone=telefone,
+                plano=plano
+            )
+            messages.success(request, 'Aluno cadastrado com Sucesso! Faça login.')
+            return redirect('login')
+        else:
+            messages.error(request, 'Erro ao cadastrar. Verifique os dados.')
+    else:
+        form = UserCreationForm()
+    return render(request, 'usuarios/registrar_aluno.html', {'form': form})
+
+@login_required
+@user_passes_test(is_staff)
+def registrar_instrutor(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        nome = request.POST.get('nome')
+        idade = request.POST.get('idade')
+        cpf = request.POST.get('cpf')
+        telefone = request.POST.get('telefone')
+        codigo_ef = request.POST.get('codigo_ef')
+        
+        if form.is_valid():
+            user = form.save()
+            Instrutor.objects.create(
+                user=user,
+                nome=nome,
+                idade=idade,
+                cpf=cpf,
+                telefone=telefone,
+                codigo_ef=codigo_ef
+            )
+            messages.success(request, 'Instrutor cadastrado com Sucesso! Faça login.')
+            return redirect('listar_instrutores')
+        else:
+            messages.error(request, 'Erro ao cadastrar. Verifique os dados.')
+    else:
+        form = UserCreationForm()
+    return render(request, 'usuarios/registrar_instrutor.html', {'form': form})
+        
 def cadastrar_aluno(request):
     if request.method == "POST":
         form = AlunoForm(request.POST)
@@ -90,3 +149,7 @@ def deletar_instrutor(request, instrutor_id):
     instrutor.delete()
     return redirect('listar_instrutores')
 
+class CustomLogoutView(LoginView):
+    def dispatch(self, request, *args, **kwargs):
+        messages.info(request, 'Você saiu da sua conta com segurança')
+        return super(request, *args, **kwargs)

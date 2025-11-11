@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Aluno(models.Model):
     PLANO_CHOICES = [
@@ -6,6 +7,7 @@ class Aluno(models.Model):
         ('PREMIUM', 'Premium'),
         ('VIP', 'VIP'),
     ]
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     nome = models.CharField(max_length=30)
     idade = models.IntegerField()
     cpf = models.CharField(max_length=11, null=True, blank=True)
@@ -13,6 +15,7 @@ class Aluno(models.Model):
     plano = models.CharField(max_length=7, choices=PLANO_CHOICES, null=True, blank=True)
     
 class Instrutor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     nome = models.CharField(max_length=30)
     idade = models.IntegerField()
     cpf = models.CharField(max_length=11, null=True, blank=True)
