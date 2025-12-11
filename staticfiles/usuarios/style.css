@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: hsl(0, 0%, 15%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+header {
+    display: flex;
+    flex-direction: column; /* empilha h1, p e nav */
+    align-items: center;
+    background-color: hsl(0, 0%, 25%);
+    border-radius: 15px 15px 0 0;
+    border-bottom: 3px solid black;
+    padding: 20px 40px;
+    width: 75%;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Título e parágrafo */
+header h1 {
+    color: hsl(0, 0%, 85%);
+    margin-bottom: 10px;
+}
+
+header p {
+    color: hsl(0, 0%, 80%);
+    margin-bottom: 20px;
+}
+
+/* Nav */
+header nav {
+    display: flex;
+    justify-content: space-around; /* separa os links */
+    width: 100%; /* ocupa a largura total do header */
+ /* limita largura do nav */
+}
+
+/* Links do nav */
+header nav a {
+    text-decoration: none;
+    color: hsl(0, 0%, 85%);
+    font-weight: bold;
+    padding: 8px 10px;
+    background-color: hsl(0, 0%, 30%);
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+header nav a:hover {
+    background-color: hsl(0, 0%, 50%);
+    color: hsl(0, 0%, 100%);
+}
+
+/* Main */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: hsl(0, 0%, 25%);
+    border-radius: 0 0 15px 15px;
+    width: 75%;
+    max-width: 800px;
+    margin-top: -3px; /* para “grudar” com header sem quebrar a borda */
+    padding: 20px;
+    min-height: 300px;
+}
