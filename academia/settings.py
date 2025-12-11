@@ -137,3 +137,18 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',
 }
+
+from django.contrib.auth import get_user_model
+
+if os.environ.get("CREATE_SUPERUSER") == "True":
+    try:
+        User = get_user_model()
+        if not User.objects.filter(username=os.environ.get("DJANGO_SU_NAME")).exists():
+            User.objects.create_superuser(
+                username=os.environ.get("DJANGO_SU_NAME"),
+                email=os.environ.get("DJANGO_SU_EMAIL"),
+                password=os.environ.get("DJANGO_SU_PASSWORD"),
+            )
+            print("Superusuário criado com sucesso!")
+    except Exception as e:
+        print("Erro ao criar superusuário:", e)
