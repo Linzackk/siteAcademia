@@ -49,16 +49,19 @@ Use as seguintes contas para explorar o sistema online:
 ### ADMIN
 
 Usuário: admin
+
 Senha: >-7I}5LF1Zde
 
 ### Aluno
 
 Usuário: JoaoCarlos
+
 Senha: 123
 
 ### Instrutor
 
 Usuário: PedroHenrique
+
 Senha: 123
 
 ## Como Rodar Localmente
