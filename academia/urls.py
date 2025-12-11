@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from usuarios.views import CustomLogoutView
+from usuarios.views import CustomLogoutView, criar_superusuario
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('usuarios.urls')),
     path('login/', auth_views.LoginView.as_view(template_name='templates/login.html'), name='login'),
+    path("criar-superusuario/", criar_superusuario),
 ]
