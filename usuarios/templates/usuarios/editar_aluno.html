@@ -29,9 +29,15 @@
         </div>
 
         <div class="mb-3">
-            <label for="plano" class="form-label fw-bold">Plano</label>
-            <input type="text" class="form-control" id="plano" name="cplano" value="{{ form.plano.value|default:'' }}">
+            <label for="plano" class="form-label fw-bold ">Plano</label>
+            <select name="plano" id="plano" class="form-select">
+                <option value="">Selecione o Plano</option>
+                <option value="BASICO">Básico</option>
+                <option value="PREMIUM">Premium</option>
+                <option value="VIP">VIP</option>
+            </select>
         </div>
+        
         <div class="text-center mb-5 mt-5">
             <button type="submit" class="btn btn-success me-5">Salvar</button>
             <a href="{% url 'listar_alunos' %} " class="btn btn-info ms-5">Voltar</a>
