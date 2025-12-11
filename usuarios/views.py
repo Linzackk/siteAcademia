@@ -160,18 +160,3 @@ def logout_view(request):
     logout(request)
     messages.info(request, 'Você saiu da conta com segurança.')
     return redirect('home')
-
-from django.contrib.auth.models import User
-from django.http import HttpResponse
-
-def criar_superusuario(request):
-    if User.objects.filter(username="admin").exists():
-        return HttpResponse("Superusuário já existe.")
-
-    User.objects.create_superuser(
-        username="admin",
-        password=">-7I}5LF1Zde",
-        email="admin@example.com"
-    )
-    
-    return HttpResponse("Superusuário criado com sucesso!")
